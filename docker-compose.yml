@@ -1,0 +1,35 @@
+version: "3.3"
+
+services:
+  db:
+    image: 'postgres:latest'
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    expose:
+      - "5432"
+    restart: always
+    environment:
+      POSTGRES_USER: pije76 # change to your database username
+      POSTGRES_PASSWORD: tratap60 # change to your database password
+      POSTGRES_DB: frontend # change to your database name
+
+  app:
+    build: .
+    command: python /app/manage.py runserver 0.0.0.0:8000
+    image: django-webserver-database
+    tty: true
+    ports:
+      - "8000:8000"
+    volumes:
+      - .:/app
+      #- ./app/media/data/graph3:/app
+    restart: on-failure
+    #mem_limit: 8024m
+    #cpu_count: 4
+    depends_on:
+      - db
+
+volumes:
+  postgres_data:
+
+

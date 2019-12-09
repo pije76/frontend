@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'myapp',
     'chartjs'
+    'background_task',
 ]
 
 MIDDLEWARE = [

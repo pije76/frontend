@@ -1,9 +1,11 @@
 from functools import reduce
 
-from django.shortcuts import render
-from django.views.decorators.csrf import csrf_exempt
+from django.contrib import messages
+from django.contrib.auth.models import User
 from django.http import HttpResponse, HttpResponseRedirect
-from django.shortcuts import redirect
+from django.shortcuts import redirect, render
+from django.views.decorators.csrf import csrf_exempt
+from django.views.generic.edit import FormView
 
 import re
 from time import sleep
@@ -86,6 +88,8 @@ import plotly.tools as tls
 import plotly.io as pio
 
 from myapp.results import *
+from myapp.forms import GenerateRandomUserForm
+from myapp.tasks import create_random_user_accounts
 
 pio.orca.config.use_xvfb = True
 pio.orca.config.save()
@@ -138,6 +142,16 @@ e_value_1 = []
 score_1 = []
 options = Options()
 options.set_headless(headless=True)
+
+class GenerateRandomUserView(FormView):
+    template_name = 'results.html'
+    form_class = GenerateRandomUserForm
+
+    def form_valid(self, form):
+        total = form.cleaned_data.get('total')
+        create_random_user_accounts.delay(total)
+        messages.success(self.request, 'We are generating your random users! Wait a moment and refresh this page.')
+        return redirect('users_list')
 
 def load_help(request):
 	return render(request, 'help.html')

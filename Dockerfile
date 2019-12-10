@@ -30,7 +30,8 @@ RUN . /opt/conda/etc/profile.d/conda.sh && \
  pip install scipy && \
  pip install imgkit && \
  pip install psutil && \
- pip install pandas 
+ pip install pandas && \
+ pip install Celery
 
 
 #RUN  apt-get install -y wkhtmltopdf  

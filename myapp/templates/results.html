@@ -8,7 +8,14 @@
 			<div>
 				<div class="tit">Results</div>
 				<div class="message">
-					Test
+					<h2>Generate Random Users</h2>
+						<form method="post">
+							{% csrf_token %}
+							<table>
+							{{ form }}
+							</table>
+							<button type="submit">Submit</button>
+						</form>
 				</div>
 			</div>
 		</div>

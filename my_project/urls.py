@@ -42,12 +42,15 @@ load_help,
 get_results
 )
 
+from myapp import views
+
 from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', create_view,name="init"),
     path('results/', get_results, name='get_results'),
+    path('generate/', views.GenerateRandomUserView.as_view(), name='generate'),
     path('start_automation/', start_automation, name='start_automation'),
     path('searchTxtAndDownload/', searchTxtAndDownload, name='search_txt'),
     path('searchFaaAndDownload/', searchFaaAndDownload, name='search_faa'),
@@ -58,9 +61,9 @@ urlpatterns = [
     path('getplotly2d',  getPlotly2D, name='get_plotly2d'),
     path('draw_plot2d', draw_plot, name='draw_plot2d'),
     path('getplotly2d2',  getPlotly2D_2, name='get_plotly2d2'),
-    path('secgraph$', secondgraph, name='secondgraph'),
-    path('nextprev$', next_prev, name='nextprev'),
-#    path('third', thirdgraph, name='third'),
+    path('secgraph', secondgraph, name='secondgraph'),
+    path('nextprev', next_prev, name='nextprev'),
+    path('third', thirdgraph, name='third'),
     path('draw_plot2d_2', draw_plot_graph_3, name='draw_plot2d_2'),
     path('draw_plot2d_1', draw_plot_graph_1, name='draw_plot2d_1'),
     path('faafile_downloader_fc', faafile_downloader, name='faafile_downloader_fc'),

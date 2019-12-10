@@ -50,7 +50,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', create_view,name="init"),
     path('results/', get_results, name='get_results'),
-    path('generate/', views.GenerateRandomUserView.as_view(), name='generate'),
     path('start_automation/', start_automation, name='start_automation'),
     path('searchTxtAndDownload/', searchTxtAndDownload, name='search_txt'),
     path('searchFaaAndDownload/', searchFaaAndDownload, name='search_faa'),

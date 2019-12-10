@@ -143,15 +143,11 @@ score_1 = []
 options = Options()
 options.set_headless(headless=True)
 
-class GenerateRandomUserView(FormView):
-    template_name = 'results.html'
-    form_class = GenerateRandomUserForm
+def create_view(request):
+	return render(request, 'home.html', {'file_name': False})
 
-    def form_valid(self, form):
-        total = form.cleaned_data.get('total')
-        create_random_user_accounts.delay(total)
-        messages.success(self.request, 'We are generating your random users! Wait a moment and refresh this page.')
-        return redirect('users_list')
+def get_results(request):
+	return render(request, 'results.html')
 
 def load_help(request):
 	return render(request, 'help.html')
@@ -535,13 +531,6 @@ def drawable(filename, plot_path):
 
 				flag = True
 	return flag
-
-
-def create_view(request):
-	return render(request, 'home.html', {'file_name': False})
-
-def get_results(request):
-	return render(request, 'results.html')
 
 # I didn't change anything about this function
 @csrf_exempt

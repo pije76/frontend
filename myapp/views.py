@@ -841,7 +841,6 @@ def getPlotimage(request):
 	response = HttpResponse(figdata_png, content_type='image/png')
 	return response
 
-
 def result_artifact(iter,ip_form):
 	datapath = './media/'
 	datapath_1 = './media/data'

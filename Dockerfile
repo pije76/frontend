@@ -67,7 +67,5 @@ COPY ./  /app
 COPY ./start.sh /app/start.sh
 RUN chmod +x /app/geckodriver
 RUN chmod +x /app/start.sh
-RUN chmod 775 ./media/
-RUN chown ubuntu:ubuntu ./media/
 
 ENTRYPOINT "/app/start.sh"
